@@ -1,0 +1,9 @@
+[
+null,
+{"id":1,"battlerName":"Actor_Seph","characterIndex":0,"characterName":"Actor_Ruins","classId":1,"equips":[1,0,0,3,0],"faceIndex":0,"faceName":"Actor_Ruins","traits":[{"code":62,"dataId":0,"value":1}],"initialLevel":1,"maxLevel":99,"name":"세프","nickname":"","note":"","profile":""},
+{"id":2,"battlerName":"Actor_Vioneh","characterIndex":1,"characterName":"Actor_Ruins","classId":1,"equips":[1,0,0,3,0],"faceIndex":1,"faceName":"Actor_Ruins","traits":[],"initialLevel":1,"maxLevel":99,"name":"비오네","nickname":"","note":"","profile":""},
+{"id":3,"battlerName":"Actor_Setzrel","characterIndex":2,"characterName":"Actor_Ruins","classId":3,"equips":[3,0,0,0,0],"faceIndex":2,"faceName":"Actor_Ruins","traits":[],"initialLevel":1,"maxLevel":99,"name":"세츠렐","nickname":"","note":"","profile":""},
+{"id":4,"battlerName":"Actor_Genserion","characterIndex":3,"characterName":"Actor_Ruins","classId":4,"equips":[6,0,0,0,0],"faceIndex":3,"faceName":"Actor_Ruins","traits":[],"initialLevel":1,"maxLevel":99,"name":"겐세리온","nickname":"","note":"","profile":""},
+{"id":5,"battlerName":"Actor_Passer","characterIndex":4,"characterName":"Actor_Ruins","classId":5,"equips":[7,0,0,0,0],"faceIndex":4,"faceName":"Actor_Ruins","traits":[],"initialLevel":1,"maxLevel":99,"name":"행인","nickname":"","note":"","profile":""},
+{"id":6,"battlerName":"Actor_jewel","characterIndex":5,"characterName":"Actor_Ruins","classId":6,"equips":[2,0,0,0,0],"faceIndex":5,"faceName":"Actor_Ruins","traits":[],"initialLevel":1,"maxLevel":99,"name":"쥬얼","nickname":"","note":"","profile":""}
+]
