@@ -381,6 +381,7 @@ Scene_Map.prototype.onMapLoaded = function() {
 };
 
 Scene_Map.prototype.start = function() {
+    console.log ("Scene_Map.prototype.start");
     Scene_Base.prototype.start.call(this);
     SceneManager.clearStack();
     if (this._transfer) {
@@ -445,6 +446,7 @@ Scene_Map.prototype.isBusy = function() {
 };
 
 Scene_Map.prototype.terminate = function() {
+    console.log ("Scene_Map.prototype.terminate");
     Scene_Base.prototype.terminate.call(this);
     if (!SceneManager.isNextScene(Scene_Battle)) {
         this._spriteset.update();
@@ -626,6 +628,7 @@ Scene_Map.prototype.fadeOutForTransfer = function() {
 };
 
 Scene_Map.prototype.launchBattle = function() {
+    console.log ("Scene_Map.prototype.launchBattle");
     BattleManager.saveBgmAndBgs();
     this.stopAudioOnBattleStart();
     SoundManager.playBattleStart();
