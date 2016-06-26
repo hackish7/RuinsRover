@@ -1217,6 +1217,7 @@ SoundManager.loadSystemSound = function(n) {
 };
 
 SoundManager.playSystemSound = function(n) {
+    console.log("playSystemSound : " + n);
     if ($dataSystem) {
         AudioManager.playStaticSe($dataSystem.sounds[n]);
     }
