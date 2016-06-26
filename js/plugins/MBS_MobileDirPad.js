@@ -286,37 +286,37 @@ MBS.MobileDirPad = {};
 	}
 
 	//-----------------------------------------------------------------------------
-	// Scene_Base
+	// Scene_Map
 	//
 	// The base scene class for all other scenes
 
-	var Scene_Base_start = Scene_Base.prototype.start;
-	var Scene_Base_update = Scene_Base.prototype.update;
+	var Scene_Map_start = Scene_Map.prototype.start;
+	var Scene_Map_update = Scene_Map.prototype.update;
 
-	Scene_Base.prototype.isMobileDevice = function() {
+	Scene_Map.prototype.isMobileDevice = function() {
 		return Utils.isMobileDevice() || $.Param.pcDebug;
 	};
 
-	Scene_Base.dirpad = true;
+	Scene_Map.dirpad = true;
 
-	Scene_Base.prototype.start = function() {
-	    Scene_Base_start.apply(this, arguments);
-	    Scene_Base.dirpad = Scene_Base.dirpad && this.isMobileDevice();
+	Scene_Map.prototype.start = function() {
+	    Scene_Map_start.apply(this, arguments);
+	    Scene_Map.dirpad = Scene_Map.dirpad && this.isMobileDevice();
 
 	    if (!$.Param.onlyMap || this instanceof Scene_Map) {
 		    this.createDirPad();
 		    this.createActionButtons();
-		    $.enable(Scene_Base.dirpad);
+		    $.enable(Scene_Map.dirpad);
 		}
 	};
 
-	Scene_Base.prototype.update = function() {
-		Scene_Base_update.apply(this, arguments);
+	Scene_Map.prototype.update = function() {
+		Scene_Map_update.apply(this, arguments);
 		if (this.isMobileDevice() && this._dirPad != undefined && this._aButton != undefined && this._cButton != undefined)
-			this._dirPad.visible = this._aButton.visible = this._cButton.visible = Scene_Base.dirpad;
+			this._dirPad.visible = this._aButton.visible = this._cButton.visible = Scene_Map.dirpad;
 	};
 
-	Scene_Base.prototype.createDirPad = function() {
+	Scene_Map.prototype.createDirPad = function() {
 		this._dirPad = new Sprite_DirPad();
 		this._dirPad.opacity = $.Param.opacity;
 
@@ -331,7 +331,7 @@ MBS.MobileDirPad = {};
 		this.addChild(this._dirPad);
 	};
 
-	Scene_Base.prototype.createActionButtons = function() {
+	Scene_Map.prototype.createActionButtons = function() {
 		this._aButton = new Sprite_Button(0);
 		this._aButton.opacity = $.Param.opacity;
 
@@ -358,17 +358,18 @@ MBS.MobileDirPad = {};
 		this.addChild(this._cButton);
 	};
 
-	Scene_Base.prototype.hideUserInterface = function() {
+	Scene_Map.prototype.hideUserInterface = function() {
 		this._dirPad.hide();
 		this._aButton.hide();
 		this._cButton.hide();
 	};
 
-	Scene_Base.prototype.showUserInterface = function() {
+	Scene_Map.prototype.showUserInterface = function() {
 		this._dirPad.show();
 		this._aButton.show();
 		this._cButton.show();
 	};
+
 
 	//-----------------------------------------------------------------------------
 	// Scene_Map
