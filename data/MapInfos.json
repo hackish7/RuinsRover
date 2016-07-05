@@ -1,14 +1,14 @@
 [
 null,
-{"id":1,"expanded":false,"name":"광산","order":6,"parentId":5,"scrollX":1366.8,"scrollY":778.1999999999999},
+{"id":1,"expanded":true,"name":"광산","order":6,"parentId":5,"scrollX":1518.6666666666667,"scrollY":864.6666666666666},
+{"id":2,"expanded":false,"name":"오래된 광산","order":7,"parentId":1,"scrollX":1508,"scrollY":1535.3333333333333},
+{"id":3,"expanded":true,"name":"점프 테스트","order":8,"parentId":1,"scrollX":1518.6666666666667,"scrollY":864.6666666666666},
 null,
-null,
-null,
-{"id":5,"expanded":true,"name":"광산도시 로펜","order":2,"parentId":11,"scrollX":1366.8,"scrollY":778.1999999999999},
+{"id":5,"expanded":true,"name":"광산도시 로펜","order":2,"parentId":11,"scrollX":3037.3333333333335,"scrollY":1708},
 null,
 {"id":7,"expanded":false,"name":"로펜(무기/방어구점)","order":3,"parentId":5,"scrollX":1366.8,"scrollY":778.1999999999999},
-{"id":8,"expanded":false,"name":"여관 2층","order":5,"parentId":9,"scrollX":1366.8,"scrollY":778.1999999999999},
-{"id":9,"expanded":true,"name":"로펜(여관)","order":4,"parentId":5,"scrollX":1366.8,"scrollY":778.1999999999999},
+{"id":8,"expanded":false,"name":"여관 2층","order":5,"parentId":9,"scrollX":1518.6666666666667,"scrollY":864.6666666666666},
+{"id":9,"expanded":true,"name":"로펜(여관)","order":4,"parentId":5,"scrollX":1242.5454545454545,"scrollY":698.7272727272727},
 null,
-{"id":11,"expanded":true,"name":"월드맵","order":1,"parentId":0,"scrollX":5066,"scrollY":2220}
+{"id":11,"expanded":true,"name":"월드맵","order":1,"parentId":0,"scrollX":5768,"scrollY":2190}
 ]
