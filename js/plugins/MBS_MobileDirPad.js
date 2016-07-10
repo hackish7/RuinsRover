@@ -46,6 +46,10 @@
  @desc The file path for the Action Button image
  @default ./img/system/ActionButton.png
 
+ @param ActionButton2 Image
+ @desc The file path for the Action Button image
+ @default ./img/system/ActionButton.png
+
  @param CancelButton Image
  @desc The file path for the Cancel Button image
  @default ./img/system/CancelButton.png
@@ -60,6 +64,10 @@
 
  @param ActionButton Position
  @desc The ActionButton image position on screen (on format x; y)
+ @default 90; 80
+
+ @param ActionButton2 Position
+ @desc The ActionButton2 image position on screen (on format x; y)
  @default 90; 80
 
  @param CancelButton Position
@@ -103,6 +111,7 @@ MBS.MobileDirPad = {};
 
 	$.Param.dpad = $.Parameters["DPad Image"];
 	$.Param.button = $.Parameters["ActionButton Image"];
+	$.Param.bButton = $.Parameters["ActionButton2 Image"];
 	$.Param.cButton = $.Parameters["CancelButton Image"];
 
 	var dposition = $.Parameters["DPad Position"].split(";");
@@ -112,6 +121,10 @@ MBS.MobileDirPad = {};
 	var bposition = $.Parameters["ActionButton Position"].split(";");
 	$.Param.buttonPositionPercent = new PIXI.Point(Number(bposition[0]), Number(bposition[1]));
 	$.Param.buttonPosition = new PIXI.Point(-1000, -1000);
+
+	var bBposition = $.Parameters["ActionButton2 Position"].split(";");
+	$.Param.bButtonPositionPercent = new PIXI.Point(Number(bBposition[0]), Number(bBposition[1]));
+	$.Param.bButtonPosition = new PIXI.Point(-1000, -1000);
 
 	var cposition = $.Parameters["CancelButton Position"].split(";");
 	$.Param.cButtonPositionPercent = new PIXI.Point(Number(cposition[0]), Number(cposition[1]));
@@ -231,12 +244,40 @@ MBS.MobileDirPad = {};
 	Sprite_Button.prototype = Object.create(Sprite_Base.prototype);
 	Sprite_Button.prototype.constructor = Sprite_Button;
 
+	Sprite_Button.prototype.getButtonByType = function(type) {
+		var button = "";
+		switch (type)
+		{
+		case 0:
+			button = $.Param.button;
+			break;
+		case 1:
+			button = $.Param.bButton;
+			break;
+		case 2:
+			button = $.Param.cButton;
+			break;
+		}
+
+		console.log ("getButtonByType : " + type + " : " + button);
+
+		return button;
+	}
+
 	Sprite_Button.prototype.initialize = function(type) {
 		Sprite_Base.prototype.initialize.call(this);
 		this._type = type;
-		if ((type == 0 ? $.Param.button : $.Param.cButton) == "") this.visible = false;
+
+		var button = this.getButtonByType (type);
+
+		if (button == "")
+		{
+			this.visible = false;
+		}
 		else
-			this.bitmap = ImageManager.loadNormalBitmap(type == 0 ? $.Param.button : $.Param.cButton, 0);
+		{
+			this.bitmap = ImageManager.loadNormalBitmap(button, 0);	
+		}
 
 		this.anchor.y = 0.5;
 		this.anchor.x = 0.5;
@@ -260,6 +301,36 @@ MBS.MobileDirPad = {};
 	};
 
 	Sprite_Button.prototype.updateTouch = function() {
+
+		if (this._type == 0)
+		{
+			if ( TouchInput.isPressed()) {
+				var rect = new PIXI.Rectangle(this.x - this.width * this.anchor.x, this.y - this.height * this.anchor.y, this.width, this.height);
+				Input._currentState['ok'] = rect.contains(TouchInput.x, TouchInput.y);
+			} else {
+				Input._currentState['ok'] = false;
+			}
+		}
+		else if (this._type == 1)
+		{
+ 			if (TouchInput.isTriggered()) {
+				var rect = new PIXI.Rectangle(this.x - this.width * this.anchor.x, this.y - this.height * this.anchor.y, this.width, this.height);
+				Input._currentState['shift'] = rect.contains(TouchInput.x, TouchInput.y);
+			} else {
+				Input._currentState['shift'] = false;
+			}
+		}
+		else if (this._type == 2)
+		{
+			if ( TouchInput.isTriggered()) {
+				var rect = new PIXI.Rectangle(this.x - this.width * this.anchor.x, this.y - this.height * this.anchor.y, this.width, this.height);
+				Input._currentState['escape'] = rect.contains(TouchInput.x, TouchInput.y);
+			} else {
+				Input._currentState['escape'] = false;
+			}
+		}
+		
+		/*
 		if (this._type == 0 && TouchInput.isPressed()) {
 			var rect = new PIXI.Rectangle(this.x - this.width * this.anchor.x, this.y - this.height * this.anchor.y, this.width, this.height);
 			Input._currentState['ok'] = rect.contains(TouchInput.x, TouchInput.y);
@@ -271,7 +342,21 @@ MBS.MobileDirPad = {};
 		} else if (this._type == 1) {
 			Input._currentState['escape'] = false;
 		}
+		*/
 	};
+
+	Sprite_Button.prototype.getButtonPosition = function(type) {
+		switch (type)
+		{
+			case 0:
+				return $.Param.buttonPosition;
+			case 1:
+				return $.Param.bButtonPosition;
+			case 2:
+				return $.Param.cButtonPosition;
+		}
+		return $.Param.buttonPosition;
+	}
 
 	Sprite_Button.prototype.hide = function() {
 		this._moveDuration = $.Param.hideDuration;
@@ -281,7 +366,7 @@ MBS.MobileDirPad = {};
 
 	Sprite_Button.prototype.show = function() {
 		this._moveDuration = $.Param.hideDuration;
-		var dest = this._type == 0 ? $.Param.buttonPosition.x : $.Param.cButtonPosition.x;
+		var dest = this.getButtonPosition(this._type).x;
 		this._moveSpeed = (dest - this.x) / this._moveDuration;
 	}
 
@@ -312,8 +397,8 @@ MBS.MobileDirPad = {};
 
 	Scene_Map.prototype.update = function() {
 		Scene_Map_update.apply(this, arguments);
-		if (this.isMobileDevice() && this._dirPad != undefined && this._aButton != undefined && this._cButton != undefined)
-			this._dirPad.visible = this._aButton.visible = this._cButton.visible = Scene_Map.dirpad;
+		if (this.isMobileDevice() && this._dirPad != undefined && this._aButton != undefined && this._bButton != undefined && this._cButton != undefined)
+			this._dirPad.visible = this._aButton.visible = this._bButton.visible = this._cButton.visible = Scene_Map.dirpad;
 	};
 
 	Scene_Map.prototype.createDirPad = function() {
@@ -332,6 +417,8 @@ MBS.MobileDirPad = {};
 	};
 
 	Scene_Map.prototype.createActionButtons = function() {
+
+		// action button
 		this._aButton = new Sprite_Button(0);
 		this._aButton.opacity = $.Param.opacity;
 
@@ -343,9 +430,22 @@ MBS.MobileDirPad = {};
 		this._aButton.x = $.Param.buttonPosition.x;
 		this._aButton.y = $.Param.buttonPosition.y;
 
-		this._cButton = new Sprite_Button(1);
-		this._cButton.opacity = $.Param.opacity;
+		// b button
+		this._bButton = new Sprite_Button(1);
+		this._bButton.opacity = $.Param.opacity;
 
+		var x = Graphics.width * ($.Param.bButtonPositionPercent.x/100);
+		var y = Graphics.height * ($.Param.bButtonPositionPercent.y/100);
+		$.Param.bButtonPosition.x = x;
+		$.Param.bButtonPosition.y = y;
+
+		this._bButton.x = $.Param.bButtonPosition.x;
+		this._bButton.y = $.Param.bButtonPosition.y;
+		console.log ("B button : " + this._bButton.x + ", " + this._bButton.y);
+
+		//cancel button
+		this._cButton = new Sprite_Button(2);
+		this._cButton.opacity = $.Param.opacity;
 
 		var x = Graphics.width * ($.Param.cButtonPositionPercent.x/100);
 		var y = Graphics.height * ($.Param.cButtonPositionPercent.y/100);
@@ -353,20 +453,24 @@ MBS.MobileDirPad = {};
 		$.Param.cButtonPosition.y = y;
 		this._cButton.x = $.Param.cButtonPosition.x;
 		this._cButton.y = $.Param.cButtonPosition.y;
+		console.log ("C button : " + this._cButton.x + ", " + this._cButton.y);
 
 		this.addChild(this._aButton);
+		this.addChild(this._bButton);
 		this.addChild(this._cButton);
 	};
 
 	Scene_Map.prototype.hideUserInterface = function() {
 		this._dirPad.hide();
 		this._aButton.hide();
+		this._bButton.hide();
 		this._cButton.hide();
 	};
 
 	Scene_Map.prototype.showUserInterface = function() {
 		this._dirPad.show();
 		this._aButton.show();
+		this._bButton.show();
 		this._cButton.show();
 	};
 
@@ -398,7 +502,7 @@ MBS.MobileDirPad = {};
 	Scene_Map.prototype.terminate = function() {
 		if (this.isMobileDevice())
 		{
-	    	this._dirPad.visible = this._aButton.visible = this._cButton.visible = false;
+	    	this._dirPad.visible = this._aButton.visible = this._bButton.visible = this._cButton.visible = false;
 		}
 
 		Scene_Map_terminate.apply(this, arguments);
