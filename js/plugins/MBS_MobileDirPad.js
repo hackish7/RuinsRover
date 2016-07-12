@@ -48,7 +48,7 @@
 
  @param ActionButton2 Image
  @desc The file path for the Action Button image
- @default ./img/system/ActionButton.png
+ @default ./img/system/ActionButton2.png
 
  @param CancelButton Image
  @desc The file path for the Cancel Button image
@@ -67,7 +67,7 @@
  @default 90; 80
 
  @param ActionButton2 Position
- @desc The ActionButton2 image position on screen (on format x; y)
+ @desc The ActionButton image position on screen (on format x; y)
  @default 90; 80
 
  @param CancelButton Position
