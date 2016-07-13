@@ -1,7 +1,7 @@
 [
 null,
-{"id":1,"list":[{"code":111,"indent":0,"parameters":[11,"shift"]},{"code":250,"indent":1,"parameters":[{"name":"Jump1","volume":90,"pitch":100,"pan":0}]},{"code":356,"indent":1,"parameters":["SmartJump 2"]},{"code":230,"indent":1,"parameters":[10]},{"code":0,"indent":1,"parameters":[]},{"code":412,"indent":0,"parameters":[]},{"code":0,"indent":0,"parameters":[]}],"name":"","switchId":20,"trigger":2},
-{"id":2,"list":[{"code":0,"indent":0,"parameters":[]}],"name":"","switchId":1,"trigger":0},
+{"id":1,"list":[{"code":111,"indent":0,"parameters":[11,"shift"]},{"code":250,"indent":1,"parameters":[{"name":"Jump1","volume":90,"pitch":100,"pan":0}]},{"code":356,"indent":1,"parameters":["SmartJump 2"]},{"code":230,"indent":1,"parameters":[10]},{"code":0,"indent":1,"parameters":[]},{"code":412,"indent":0,"parameters":[]},{"code":0,"indent":0,"parameters":[]}],"name":"점프","switchId":20,"trigger":2},
+{"id":2,"list":[{"code":112,"indent":0,"parameters":[]},{"code":225,"indent":1,"parameters":[1,5,60,true]},{"code":225,"indent":1,"parameters":[3,5,20,true]},{"code":225,"indent":1,"parameters":[2,5,60,true]},{"code":0,"indent":1,"parameters":[]},{"code":413,"indent":0,"parameters":[]},{"code":0,"indent":0,"parameters":[]}],"name":"붕괴","switchId":6,"trigger":2},
 {"id":3,"list":[{"code":0,"indent":0,"parameters":[]}],"name":"","switchId":1,"trigger":0},
 {"id":4,"list":[{"code":0,"indent":0,"parameters":[]}],"name":"","switchId":1,"trigger":0}
 ]
