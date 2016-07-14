@@ -169,13 +169,24 @@ MBS.MobileDirPad = {};
 		this.anchor.x = 0.5;
 		this.z = 5;
 		this._lastDir = '';
+		this.isShow = true;
 	};
 
 	Sprite_DirPad.prototype.update = function() {
 		Sprite_Base.prototype.update.call(this);
 		if (!this.visible) return;
+
+		if ($gamePlayer.canMove())
+		{
+			this.show();
+		}
+		else
+		{
+			this.hide();
+		}
 		this.updateMovement();
 		this.updateTouch();
+
 	};
 
 	Sprite_DirPad.prototype.updateMovement = function() {
@@ -221,12 +232,16 @@ MBS.MobileDirPad = {};
 	};
 
 	Sprite_DirPad.prototype.hide = function() {
+		if (!this.isShow)return;
+		this.isShow = false;
 		this._moveDuration = $.Param.hideDuration;
 		var dest = 0 - 64 - this.width * (1 + this.anchor.x);
 		this._moveSpeed = (dest - this.x) / this._moveDuration;
 	};
 
 	Sprite_DirPad.prototype.show = function() {
+		if (this.isShow)return;
+		this.isShow = true;
 		this._moveDuration = $.Param.hideDuration;
 		var dest = $.Param.dpadPosition.x;
 		this._moveSpeed = (dest - this.x) / this._moveDuration;
@@ -239,6 +254,7 @@ MBS.MobileDirPad = {};
 
 	function Sprite_Button() {
 		this.initialize.apply(this, arguments);
+		this.isShow = true;
 	}
 
 	Sprite_Button.prototype = Object.create(Sprite_Base.prototype);
@@ -289,8 +305,18 @@ MBS.MobileDirPad = {};
 	Sprite_Button.prototype.update = function() {
 		Sprite_Base.prototype.update.call(this);
 		if (!this.visible) return;
+
+		if ($gamePlayer.canMove())
+		{
+			this.show();
+		}
+		else
+		{
+			this.hide();
+		}
 		this.updateMovement();
 		this.updateTouch();
+
 	};
 
 	Sprite_Button.prototype.updateMovement = function() {
@@ -359,12 +385,16 @@ MBS.MobileDirPad = {};
 	}
 
 	Sprite_Button.prototype.hide = function() {
+		if(!this.isShow)return;
+		this.isShow = false;
 		this._moveDuration = $.Param.hideDuration;
 		var dest = Graphics.width + this.width * this.anchor.x + 64;
 		this._moveSpeed = (dest - this.x) / this._moveDuration;
 	}
 
 	Sprite_Button.prototype.show = function() {
+		if(this.isShow)return;
+		this.isShow = true;
 		this._moveDuration = $.Param.hideDuration;
 		var dest = this.getButtonPosition(this._type).x;
 		this._moveSpeed = (dest - this.x) / this._moveDuration;
