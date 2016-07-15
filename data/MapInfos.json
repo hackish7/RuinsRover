@@ -12,8 +12,8 @@ null,
 null,
 null,
 {"id":12,"expanded":true,"name":"이시스의 무덤 - 2","order":7,"parentId":1,"scrollX":2485.090909090909,"scrollY":1414.909090909091},
-{"id":13,"expanded":true,"name":"오래된 갱도 - 1","order":10,"parentId":1,"scrollX":2485.090909090909,"scrollY":1414.909090909091},
+{"id":13,"expanded":true,"name":"오래된 갱도 - 1","order":10,"parentId":1,"scrollX":1518.6666666666667,"scrollY":864.6666666666666},
 {"id":14,"expanded":false,"name":"오래된 갱도 - 2","order":11,"parentId":1,"scrollX":2485.090909090909,"scrollY":1414.909090909091},
-{"id":15,"expanded":false,"name":"광산 밖","order":13,"parentId":1,"scrollX":2485.090909090909,"scrollY":1414.909090909091},
+{"id":15,"expanded":false,"name":"광산 밖","order":13,"parentId":1,"scrollX":1518.6666666666667,"scrollY":864.6666666666666},
 {"id":16,"expanded":false,"name":"레일 액션","order":12,"parentId":1,"scrollX":2467.6363636363635,"scrollY":1414.909090909091}
 ]
